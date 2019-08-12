@@ -1,13 +1,61 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(enctype='multipart/form-data' method='post')
-    input(type='file' multiple name='file')
-    button(type='submit') 提交
-  hr
-  ul
-    for dir in dirs
-      li
-        a(href=base+dir)=dir
+  div.container.mt-5
+    #fileSuccessAlert.alert.alert-success(role="alert" style="display: none")
+    #fileErrorAlert.alert.alert-danger(role="alert" style="display: none")
+
+    nav(aria-label="breadcrumb")
+      ol.breadcrumb.shadow-sm
+        for path in paths
+          li.breadcrumb-item
+            if path.valid
+              a.text-decoration-none(href='/' + path.path) #{path.name}
+            else
+              span #{path.name}
+    form(enctype='multipart/form-data' method='post').form
+      .form-group
+        .custom-file
+          input#uploadFile.custom-file-input(type='file', name='file')
+          label.custom-file-label(for="uploadFile") Choose file
+      button.btn.btn-primary(type='submit') 上传文件
+    table.table.table-striped.table-sm.mt-3
+      thead
+        tr
+          th file
+          th size
+          th modified time
+          th opr
+      tbody
+        for dir in dirs
+          tr
+            td
+              a.text-decoration-none(href=base + dir.path)
+                | !{dir.icon}
+                | #{dir.name}
+            td
+              span #{dir.size}
+            td
+              span #{dir.mtime}
+            td
+              a.text-danger(href='javascript:void(0)' onclick='triggerFileListButton("delete", event.target)'
+                data-href=base + dir.path)
+                i.fa.fa-trash
+
+block modals
+  #deleteFile.modal.fade(tabindex="-1" role="dialog" aria-labelledby="deleteFileTitle" aria-hidden="false")
+    .modal-dialog.modal-dialog-centered(role="document")
+      .modal-content
+        .modal-header
+          h5#deleteFileTitle.modal-title 危险操作
+          button.close(type=button data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+        .modal-body
+          | 确认删除&nbsp;
+          b#deleteFileName
+        .modal-footer
+          button.btn.btn-secondary(type='button' data-dismiss="modal") Cancel
+          button.btn.btn-danger(type='button' onclick="confirmDeleteFile()")
+            b DELETE
+
+
