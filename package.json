@@ -1,11 +1,12 @@
 {
   "name": "simple-file-manager",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "bin": "./bin/www",
   "scripts": {
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "commander": "^3.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",

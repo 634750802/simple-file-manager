@@ -3,8 +3,20 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const commander = require('commander')
 
 const indexRouter = require('./routes/index')
+
+const program = new commander.Command()
+program.version(process.version)
+
+program
+  .option('-P --port <port>', 'running port Default to 3000', 3000)
+  .option('-B --base-url <BaseUrl>', 'Base url, default to ""', '')
+
+program.parse(process.argv);
+
+process.env.PORT = program.port
 
 const app = express()
 
@@ -18,6 +30,10 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(function (req, res, next) {
+  req.locals.baseUrl = program.baseUrl
+  next()
+})
 app.use(indexRouter)
 
 // catch 404 and forward to error handler
