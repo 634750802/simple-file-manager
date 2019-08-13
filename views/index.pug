@@ -10,7 +10,7 @@ block content
         for path in paths
           li.breadcrumb-item
             if path.valid
-              a.text-decoration-none(href='/' + path.path) #{path.name}
+              a.text-decoration-none(href=baseUrl + '/' + path.path) #{path.name}
             else
               span #{path.name}
     form(enctype='multipart/form-data' method='post').form
@@ -30,7 +30,7 @@ block content
         for dir in dirs
           tr
             td
-              a.text-decoration-none(href=base + dir.path)
+              a.text-decoration-none(href=baseUrl + base + dir.path)
                 | !{dir.icon}
                 | #{dir.name}
             td
@@ -39,7 +39,7 @@ block content
               span #{dir.mtime}
             td
               a.text-danger(href='javascript:void(0)' onclick='triggerFileListButton("delete", event.target)'
-                data-href=base + dir.path)
+                data-href=baseUrl + base + dir.path)
                 i.fa.fa-trash
 
 block modals
