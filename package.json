@@ -1,6 +1,6 @@
 {
   "name": "simple-file-manager",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "bin": "./bin/www",
   "scripts": {
     "start": "node ./bin/www"

@@ -114,7 +114,7 @@ router.post('*', function (req, res, next) {
     })
   })
   form.on('close', function () {
-    res.redirect(req.path)
+    res.redirect(process.env.BASE_URL + req.path)
   })
   form.parse(req)
 })

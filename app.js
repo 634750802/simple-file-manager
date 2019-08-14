@@ -17,6 +17,7 @@ program
 program.parse(process.argv)
 
 process.env.PORT = program.port
+process.env.BASE_URL = program.baseUrl
 
 const app = express()
 app.locals.baseUrl = program.baseUrl
