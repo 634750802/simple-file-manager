@@ -16,7 +16,7 @@
     "moment": "^2.24.0",
     "morgan": "~1.9.0",
     "multiparty": "^4.2.0",
-    "pug": "2.0.0-beta11"
+    "pug": "3.0.1"
   },
   "repository": "https://github.com/634750802/simple-file-manager.git"
 }
