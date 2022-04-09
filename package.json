@@ -13,7 +13,7 @@
     "filesize": "^4.1.2",
     "font-awesome-filetypes": "^2.1.0",
     "http-errors": "~1.6.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "morgan": "~1.9.0",
     "multiparty": "^4.2.0",
     "pug": "2.0.0-beta11"
